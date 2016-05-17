@@ -41,7 +41,7 @@ extension PhotosTableViewController {
 // MARK: - TableView Data Source Methods
 extension PhotosTableViewController {
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.photos.count
+    return viewModel.numberOfPhotos()
   }
 
   override func tableView(tableView: UITableView,
@@ -56,5 +56,12 @@ extension PhotosTableViewController {
 
 // MARK: - TableView Delegate Methods
 extension PhotosTableViewController {
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    guard let photoViewModel = viewModel.photoViewModelForPhotoAtIndex(indexPath.row) else {
+      return
+    }
+    let photoViewController = PhotoViewController(viewModel: photoViewModel)
 
+    splitViewController?.showDetailViewController(photoViewController, sender: self)
+  }
 }

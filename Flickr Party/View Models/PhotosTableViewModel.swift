@@ -9,21 +9,32 @@
 import UIKit
 
 struct PhotosTableViewModel {
-  let photos: [Photo]
+  private let photos: [PhotoViewModel]
   let style: UITableViewStyle
 
   init(photos: [Photo], style: UITableViewStyle) {
-    self.photos = photos
+    self.photos = photos.map { PhotoViewModel(photo: $0) }
     self.style = style
   }
 }
 
 // MARK: - CRUD Methods
 extension PhotosTableViewModel {
+  func numberOfPhotos() -> Int {
+    return photos.count
+  }
+
   func titleForPhotoAtIndex(index: Int) -> String? {
     guard index < photos.count else {
       return nil
     }
-    return photos[index].title
+    return photos[index].titleForPhoto()
+  }
+
+  func photoViewModelForPhotoAtIndex(index: Int) -> PhotoViewModel? {
+    guard index < photos.count else {
+      return nil
+    }
+    return photos[index]
   }
 }

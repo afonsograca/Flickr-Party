@@ -17,24 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-    setDefaultSearchTag()
-    let photos = loadPhotos()
-    let photosViewModel = PhotosTableViewModel(photos: photos, style: .Plain)
-
-    let splitViewController = UISplitViewController()
-    splitViewController.delegate = self
-    splitViewController.preferredDisplayMode = .AllVisible
-
-    let photosTableViewController = PhotosTableViewController(viewModel: photosViewModel)
-    let photoViewController = PhotoViewController()
-
-    let navigationViewController = UINavigationController(
-      rootViewController: photosTableViewController)
-    splitViewController.viewControllers = [navigationViewController, photoViewController]
-
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = splitViewController
-    window?.makeKeyAndVisible()
+    setup()
 
     return true
   }
@@ -57,6 +40,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK: - Setup Methods
+extension AppDelegate {
+  func setup() {
+    setDefaultSearchTag()
+    let photos = loadPhotos()
+    let photosViewModel = PhotosTableViewModel(photos: photos, style: .Plain)
+    let photoViewModel = PhotoViewModel(photo: nil)
+
+    let photosTableViewController = PhotosTableViewController(viewModel: photosViewModel)
+    let photoViewController = PhotoViewController(viewModel: photoViewModel)
+
+    let navigationViewController = UINavigationController(
+      rootViewController: photosTableViewController)
+
+    let splitViewController = UISplitViewController()
+    splitViewController.viewControllers = [navigationViewController, photoViewController]
+    splitViewController.delegate = self
+    splitViewController.preferredDisplayMode = .AllVisible
+
+    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window?.rootViewController = splitViewController
+    window?.makeKeyAndVisible()
+  }
+}
+// MARK: - UISplitViewController Delegate Methods
 extension AppDelegate: UISplitViewControllerDelegate {
   func splitViewController(splitViewController: UISplitViewController,
     collapseSecondaryViewController secondaryViewController: UIViewController,
@@ -72,7 +80,7 @@ extension AppDelegate {
     guard NSUserDefaults.standardUserDefaults().stringForKey("FlickrSearchTag") != nil else {
       return
     }
-    NSUserDefaults.standardUserDefaults().setObject("party", forKey: "FlickrSearchTag2")
+    NSUserDefaults.standardUserDefaults().setObject("party", forKey: "FlickrSearchTag")
   }
 
   func loadPhotos() -> [Photo] {

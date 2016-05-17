@@ -6,7 +6,7 @@
 //  Copyright © 2016 Afonso Graça. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Photo {
   let title: String

@@ -8,14 +8,7 @@
 import Foundation
 
 class Constants {
+  // MARK: - Flickr
   static let flickrBaseUrl = "https://api.flickr.com/services/feeds/photos_public.gne?tags="
   static let flickrCallbackFormat = "&format=json&nojsoncallback=1"
-
-  static var flickrUrl: String {
-    var tag = "party"
-    if let userTag = NSUserDefaults.standardUserDefaults().stringForKey("FlickrSearchTag") {
-      tag = userTag
-    }
-    return flickrBaseUrl + tag + flickrCallbackFormat
-  }
 }
