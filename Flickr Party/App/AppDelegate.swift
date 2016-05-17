@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
   func setup() {
     setDefaultSearchTag()
-    let photos = loadPhotos()
-    let photosViewModel = PhotosTableViewModel(photos: photos, style: .Plain)
+    //let photos = loadPhotos()
+    let photosViewModel = PhotosTableViewModel(style: .Plain)
     let photoViewModel = PhotoViewModel(photo: nil)
 
     let photosTableViewController = PhotosTableViewController(viewModel: photosViewModel)

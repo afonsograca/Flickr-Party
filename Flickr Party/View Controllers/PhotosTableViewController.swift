@@ -10,10 +10,13 @@ import UIKit
 
 class PhotosTableViewController: UITableViewController {
 
-  let viewModel: PhotosTableViewModel
+  var viewModel: PhotosTableViewModel
   init(viewModel: PhotosTableViewModel) {
     self.viewModel = viewModel
     super.init(style: viewModel.style)
+
+    self.viewModel.delegate = self
+    self.viewModel.loadPhotos()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -35,6 +38,7 @@ extension PhotosTableViewController {
   func setupTableView() {
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.tableFooterView = UIView(frame: CGRect.zero)
   }
 }
 
@@ -63,5 +67,13 @@ extension PhotosTableViewController {
     let photoViewController = PhotoViewController(viewModel: photoViewModel)
 
     splitViewController?.showDetailViewController(photoViewController, sender: self)
+  }
+}
+
+// MARK: - PhotosTableViewModelDelegate Methods
+extension PhotosTableViewController: PhotosTableViewModelDelegate {
+  func reloadPhotos(photos: [PhotoViewModel]) {
+    viewModel.updatePhotos(photos)
+    tableView.reloadData()
   }
 }
