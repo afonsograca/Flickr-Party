@@ -1,1 +1,1 @@
-# Flickr-Party
+# Flickr Party
