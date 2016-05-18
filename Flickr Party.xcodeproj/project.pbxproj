@@ -105,6 +105,7 @@
 				<string>6A3C33061CEB33A900E5AB76</string>
 				<string>6A3C332A1CEB510400E5AB76</string>
 				<string>6A3C333B1CEB768900E5AB76</string>
+				<string>6A4EF9D91CEBD9120037488D</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -658,7 +659,9 @@
 		<key>6A3C33211CEB360100E5AB76</key>
 		<dict>
 			<key>children</key>
-			<array/>
+			<array>
+				<string>6A4EF9D71CEBD8FA0037488D</string>
+			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>path</key>
@@ -844,8 +847,6 @@ fi</string>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>Photo.swift</string>
 			<key>path</key>
 			<string>Photo.swift</string>
 			<key>sourceTree</key>
@@ -887,8 +888,6 @@ fi</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>View Controllers</string>
 			<key>path</key>
 			<string>View Controllers</string>
 			<key>sourceTree</key>
@@ -922,8 +921,6 @@ fi</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Scroll Views</string>
 			<key>path</key>
 			<string>Scroll Views</string>
 			<key>sourceTree</key>
@@ -977,8 +974,6 @@ fi</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>View Models</string>
 			<key>path</key>
 			<string>View Models</string>
 			<key>sourceTree</key>
@@ -1001,6 +996,41 @@ fi</string>
 		<dict>
 			<key>fileRef</key>
 			<string>6A3C334A1CEBC97700E5AB76</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6A4EF9D71CEBD8FA0037488D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6A4EF9D81CEBD9120037488D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Table Views</string>
+			<key>path</key>
+			<string>Table Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6A4EF9D81CEBD9120037488D</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UITableView+isEmpty.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6A4EF9D91CEBD9120037488D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6A4EF9D81CEBD9120037488D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>

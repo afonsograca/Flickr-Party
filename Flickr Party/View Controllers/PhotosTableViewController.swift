@@ -11,12 +11,15 @@ import UIKit
 class PhotosTableViewController: UITableViewController {
 
   var viewModel: PhotosTableViewModel
+
+  let spinningView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   init(viewModel: PhotosTableViewModel) {
     self.viewModel = viewModel
     super.init(style: viewModel.style)
 
     self.viewModel.delegate = self
     self.viewModel.loadPhotos()
+    configure()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -25,6 +28,13 @@ class PhotosTableViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    setup()
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    setupSpinningWheel()
   }
 
   override func didReceiveMemoryWarning() {
@@ -33,11 +43,39 @@ class PhotosTableViewController: UITableViewController {
   }
 }
 
-// MARK: - Setup
-extension PhotosTableViewController {
+// MARK: - Configure and Setup Methods
+extension PhotosTableViewController: PresentableViewController {
+  func configure() {
+    view.backgroundColor = backgroundColor
+  }
+
+  func setup() {
+    setupTableView()
+    setupNavigationBar()
+  }
+
+  func setupNavigationBar() {
+    navigationItem.title = "\(Globals.flickrSearchTag.capitalizedString) Photos"
+  }
+
+  func setupSpinningWheel() {
+    spinningView.translatesAutoresizingMaskIntoConstraints = false
+    spinningView.hidesWhenStopped = true
+
+
+    spinningView.center = view.center
+    view.addSubview(spinningView)
+
+    if tableView.isEmpty() {
+      tableView.userInteractionEnabled = false
+      spinningView.startAnimating()
+    }
+  }
+
   func setupTableView() {
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.backgroundColor = .clearColor()
     tableView.tableFooterView = UIView(frame: CGRect.zero)
   }
 }
@@ -74,6 +112,8 @@ extension PhotosTableViewController {
 extension PhotosTableViewController: PhotosTableViewModelDelegate {
   func reloadPhotos(photos: [PhotoViewModel]) {
     viewModel.updatePhotos(photos)
+    tableView.userInteractionEnabled = true
+    spinningView.stopAnimating()
     tableView.reloadData()
   }
 }

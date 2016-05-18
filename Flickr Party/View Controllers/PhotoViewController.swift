@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoViewController: UIViewController, PresentableViewController {
+class PhotoViewController: UIViewController {
 
   let viewModel: PhotoViewModel
   let scrollView: UIScrollView
@@ -42,18 +42,23 @@ class PhotoViewController: UIViewController, PresentableViewController {
 }
 
 // MARK: - Configure and Setup Methods
-extension PhotoViewController: PresentableImageScrollView, ImageLoaderController {
+extension PhotoViewController: PresentableViewController, PresentableImageScrollView,
+ImageLoaderController {
   func configure() {
     view.backgroundColor = backgroundColor
   }
   func setup() {
     if viewModel.containsPhoto() {
       setupImageView()
+      setBarTitle(viewModel.titleForPhoto())
     } else {
       setupNoImageLabel()
     }
   }
 
+  func setBarTitle(title: String?) {
+    navigationItem.title = title
+  }
   func setupNoImageLabel() {
     noImageLabel.text = "No photo selected."
 
@@ -92,10 +97,10 @@ extension PhotoViewController: PresentableImageScrollView, ImageLoaderController
         strongSelf.imageView.translatesAutoresizingMaskIntoConstraints = false
         strongSelf.scrollView.addSubview(strongSelf.imageView)
 
-        strongSelf.imageView.centerXAnchor.constraintEqualToAnchor(
-          strongSelf.scrollView.centerXAnchor).active = true
-        strongSelf.imageView.centerYAnchor.constraintEqualToAnchor(
-          strongSelf.scrollView.centerYAnchor).active = true
+        strongSelf.imageView.widthAnchor.constraintEqualToAnchor(
+          strongSelf.scrollView.widthAnchor).active = true
+        strongSelf.imageView.heightAnchor.constraintEqualToAnchor(
+          strongSelf.scrollView.heightAnchor).active = true
 
       }
     }

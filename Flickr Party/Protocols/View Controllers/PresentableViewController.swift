@@ -17,3 +17,9 @@ extension PresentableViewController where Self: UIViewController {
     return .whiteColor()
   }
 }
+
+extension PresentableViewController where Self: UITableViewController {
+  var backgroundColor: UIColor {
+    return .whiteColor()
+  }
+}
